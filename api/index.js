@@ -3,7 +3,7 @@ const express = require('express');
 const jwt = require('express-jwt');
 const jwks = require('jwks-rsa');
 
-const jwtIssuer = process.env.JWT_ISSUER || "https://retro.eu.auth0.com/";
+const jwtIssuer = process.env.JWT_ISSUER || "https://malan-wedding.eu.auth0.com/";
 const jwtAudience = process.env.JWT_AUDIENCE || 'https://malan.wedding/api';
 
 const api = express.Router();
