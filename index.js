@@ -11,6 +11,7 @@ const winston = require('winston');
 
 // local requires
 const webhooks = require('./webhooks');
+const api = require('./api');
 
 // env
 const port = process.env.PORT || 3000;
@@ -32,6 +33,7 @@ const app = express();
 
 
 // set up pipeline
+app.use('/api', api);
 app.use(express.static('public'));
 app.use('/webhooks', webhooks(ghsecret));
 app.listen(port, () => winston.info(`Listening on port ${port}!`));
