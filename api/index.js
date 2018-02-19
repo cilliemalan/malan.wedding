@@ -22,18 +22,33 @@ var jwtCheck = jwt({
 });
 
 
-api.use(jwtCheck);
 
 api.use((req, res, next) => {
     try {
-        next();
-        winston.verbose('API %s request for %s by %j -> ', req.method, req.url, (req.user && req.user.sub) || 'anonymous', res.statusCode);
+        const r = next();
+        winston.verbose('API %s request for %s by %j -> %s', req.method, req.url, (req.user && req.user.sub) || 'anonymous', res.statusCode);
+        return r;
     } catch (e) {
         winston.error('Exception during request: %j', e);
         throw e;
     }
 });
 
+api.use(jwtCheck);
+
 api.get('/', (req, res) => res.json({ status: 'ok' }));
 
+
+
+
+
+
+api.use((err, req, res, next) => {
+    if(err.name == "UnauthorizedError") {
+        res.status(403).end();
+    } else {
+        winston.warn('request error for %s request for %s by %j -> %j', req.method, req.url, (req.user && req.user.sub) || 'anonymous', err);
+        res.status(500).end();
+    }
+})
 module.exports = api;
