@@ -6,7 +6,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>The Wedding of Meghan and Cillié</title>
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script>
+        //ghetto promise
+        (function () {
+            var recaptchaReady = [];
+            window.logRecaptchaReady = function (callback) {
+                recaptchaReady.push(callback);
+            }
+            window.recaptchaLoadCallback = function () {
+                for (var i = 0; i < recaptchaReady.length; ++i) {
+                    recaptchaReady[i].apply();
+                }
+
+                window.logRecaptchaReady = function (callback) {
+                    callback();
+                }
+            }
+        })();
+    </script>
+    <script src="https://www.google.com/recaptcha/api.js?onload=recaptchaLoadCallback&amp;render=explicit" async defer></script>
     <style>
         body {
             margin: 0;
