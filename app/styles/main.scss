@@ -1,0 +1,29 @@
+
+body {
+    margin: 0;
+    padding: 0;
+    background: #888;
+}
+
+@keyframes fadein {
+    0% {
+        opacity: 0.01;
+    }
+    10% {
+        opacity: 0.01;
+    }
+    to {
+        opacity: 1.0;
+    }
+}
+
+#save_the_date {
+    width: 100%;
+    max-width: 800px;
+    max-height: 800px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    margin: 20px auto;
+    display: block;
+    background: white;
+    animation: fadein 4s;
+}
