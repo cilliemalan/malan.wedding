@@ -29,7 +29,7 @@ export class KeepMeInTheLoop extends React.Component {
         errors.email = !this.state.email || !/(?=.+@.+\..+).+/.test(this.state.email);
         errors.name = !this.state.name;
         this.setState({ errors });
-        return !Object.values(errors).filter(x=>x).length;
+        return !Object.values(errors).filter(x => x).length;
     }
 
     onSubmit(event) {
@@ -75,6 +75,12 @@ export class KeepMeInTheLoop extends React.Component {
                     </button>
                 </div>
             </form>
+            <div class='smallprint'>
+                Please&nbsp;see&nbsp;
+                <a href="/terms_and_conditions.html" target="_blank">Terms&nbsp;&amp;&nbsp;Conditions</a>
+                &nbsp;and&nbsp;
+                <a href="/privacy_policy.html" target="_blank">Privacy&nbsp;Policy</a>.
+            </div>
         </div>;
     }
 }

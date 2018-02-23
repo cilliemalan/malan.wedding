@@ -21,6 +21,10 @@ body {
     }
 }
 
+a {
+    color: navy;
+}
+
 input[type=text],
 input[type=email],
 input[type=password],
@@ -75,7 +79,16 @@ select {
             }
         }
 
-        
+    }
+    
+    .smallprint {
+        font-size:11px;
+        text-align: right;
+        max-width: 800px;
+        width: 100%;
+        padding: 0 10px;
+        box-sizing: border-box;
+        margin: 0 auto;
     }
 }
 
