@@ -36,6 +36,22 @@ select {
     }
 }
 
+#flasher {
+    display: block;
+    width: 100%;
+    font-size: 20px;
+    padding: 20px 0;
+    background: #96e1eb;
+
+    a {
+        position: absolute;
+        top: 0;
+        right: 0;
+        text-decoration: none;
+        padding: 17px 20px;
+    }
+}
+
 #save_the_date {
     width: 100%;
     max-width: 800px;
