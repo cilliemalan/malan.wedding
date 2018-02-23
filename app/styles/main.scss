@@ -3,6 +3,10 @@ body {
     margin: 0;
     padding: 0;
     background: #888;
+    text-align: center;
+    font-size: 1.1rem;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    margin: 0;
 }
 
 @keyframes fadein {
@@ -22,8 +26,20 @@ body {
     max-width: 800px;
     max-height: 800px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-    margin: 20px auto;
+    margin: 50px auto;
     display: block;
     background: white;
     animation: fadein 4s;
+}
+
+#keepMeInTheLoop {
+    margin: 0;
+    padding: 20px 10px;
+    background: #eee;
+}
+
+#registries {
+    margin: 0;
+    padding: 20px 10px;
+    background: #fff;
 }
