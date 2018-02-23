@@ -17,6 +17,8 @@ const environment = process.env.NODE_ENV;
 const production = environment == 'production';
 
 module.exports = {
+    environment,
+    production,
     port,
     root,
     ghsecret,
@@ -25,5 +27,7 @@ module.exports = {
     audience,
     clientId,
     clientSecret,
-    oAuthDomain
+    oAuthDomain,
+    recaptchaKey,
+    recaptchaSecret
 }
