@@ -1,7 +1,11 @@
 import React from 'react';
+import { SaveTheDate } from './SaveTheDate';
+import { KeepMeInTheLoop } from './KeepMeInTheLoop';
+import { Registries } from './Registries';
 
 export const Home = (props) =>
     <div>
-        <img src="savethedate.jpg" id="save_the_date" alt="Save the Date! Friday 13 April" />
+        <SaveTheDate />
+        <KeepMeInTheLoop />
+        <Registries />
     </div>
-
