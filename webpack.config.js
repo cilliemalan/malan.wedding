@@ -5,6 +5,7 @@ const webpack = require('webpack');
 const config = require('./config');
 
 const dist = path.resolve(__dirname, 'public');
+const now = new Date().toISOString().replace(/[:.ZT-]/g,'');
 
 module.exports = {
     entry: {
@@ -48,7 +49,7 @@ module.exports = {
     },
     output: {
         publicPath: '/',
-        filename: 'bundle.js',
+        filename: `bundle-${now}.js`,
         path: path.resolve(__dirname, dist)
     }
 };
