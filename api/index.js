@@ -4,6 +4,12 @@ const jwt = require('express-jwt');
 const jwks = require('jwks-rsa');
 const fs = require('fs');
 const config = require('../config');
+const reCAPTCHA = require('recaptcha2');
+
+const recaptcha = new reCAPTCHA({
+    siteKey: config.recaptchaKey,
+    secretKey: config.recaptchaSecret
+});
 
 const jwtIssuer = process.env.JWT_ISSUER || "https://malan-wedding.eu.auth0.com/";
 const jwtAudience = process.env.JWT_AUDIENCE || 'https://malan.wedding/api';
@@ -41,16 +47,30 @@ api.get('/', (req, res) => res.json({ status: 'ok' }));
 api.post('/contact', (req, res) => {
     const name = req.body.name;
     const email = req.body.email;
+    const token = req.body.token;
     if (typeof name === 'string' &&
         typeof email === 'string' &&
-        name && email &&
+        typeof token === 'string' &&
+        name && email && token &&
         name.length > 3 && name.length < 100 &&
-        email.length > 3 && email.length < 100) {
-        fs.appendFile(config.listFile, `${name.replace(/,/g, ';')},${email.replace(/,/g, ';')}\n`);
+        email.length > 3 && email.length < 100 &&
+        token.length > 100 && token.length < 1000) {
+
+        recaptcha.validate(token).then(() => {
+            fs.appendFile(config.listFile, `${name.replace(/,/g, ';')},${email.replace(/,/g, ';')}\n`, e => {
+                if(e) {
+                    res.status(500).end();
+                } else {
+                    res.end();
+                }
+            });
+        }, () => {
+            res.status(400).end();
+        });
+
     } else {
-        res.status(400);
+        res.status(400).end();
     }
-    res.end();
 });
 
 
