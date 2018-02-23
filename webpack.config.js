@@ -1,6 +1,8 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MinifyPlugin = require("babel-minify-webpack-plugin");
 const webpack = require('webpack');
+const config = require('./config');
 
 const dist = path.resolve(__dirname, 'public');
 
@@ -13,13 +15,13 @@ module.exports = {
         ]
     },
     resolve: { extensions: ['.js', '.jsx'] },
-    devtool: 'inline-source-map',
     plugins: [
         new HtmlWebpackPlugin({
             template: 'app/index.ejs'
         }),
         new webpack.HotModuleReplacementPlugin(),
-        new webpack.NoEmitOnErrorsPlugin()
+        new webpack.NoEmitOnErrorsPlugin(),
+        new MinifyPlugin()
     ],
     module: {
         rules: [
