@@ -17,20 +17,29 @@ const RedisStore = require('connect-redis')(session);
 const webhooks = require('./webhooks');
 const api = require('./api');
 const webpackconfig = require('./webpack.config');
-
-// env
-const port = process.env.PORT || 3000;
-const ghsecret = process.env.GITHUB_HOOK_SECRET;
-const loglevel = process.env.LOGLEVEL || 'verbose';
+const config = require('./config');
 
 // set up logging
+const mask = (a) => a ? a.replace(/./g, '*') : a;
 winston.configure({
-    transports: [new (winston.transports.Console)({ level: loglevel, colorize: true })]
+    transports: [new (winston.transports.Console)({ level: config.loglevel, colorize: true })]
 });
 winston.info('starting...');
-winston.info(`loglevel: ${loglevel}`);
-winston.info('port: %s', port);
-winston.info('github hook secret: %s', !!ghsecret);
+winston.info(`loglevel: ${config.loglevel}`);
+winston.info('port: %s', config.port);
+winston.info('root: %s', config.root);
+winston.info('environment: %s', config.environment);
+winston.info('oauth issuer: %s', config.issuer);
+winston.info('oauth issuer domain: %s', config.oAuthDomain);
+winston.info('oauth audience: %s', config.audience);
+winston.info('oauth client id: %s', config.clientId);
+winston.info('oauth client secret: %s', mask(config.clientSecret));
+winston.info('github hook secret: %s', mask(config.ghsecret));
+winston.info('recaptcha key: %s', config.recaptchaKey);
+winston.info('recaptcha secret: %s', mask(config.recaptchaSecret));
+winston.info('GA tracking ID: %s', config.gaTrackingId);
+
+
 
 // express app
 const app = express();
@@ -43,7 +52,7 @@ app.use('/api', api);
 app.use(express.static('public'));
 
 // webhooks
-app.use('/webhooks', webhooks(ghsecret));
+app.use('/webhooks', webhooks(config.ghsecret));
 
 // webpack
 const webpackCompiler = webpack(webpackconfig);
@@ -61,4 +70,4 @@ app.use((req, res) => {
 });
 
 
-app.listen(port, () => winston.info(`Listening on port ${port}!`));
+app.listen(config.port, () => winston.info(`Listening on port ${config.port}!`));
