@@ -18,11 +18,22 @@ export class KeepMeInTheLoop extends React.Component {
         const pFocus = new Promise((resolve) => this._resolveFocus = resolve);
 
         Promise.all([pFocus, reCaptchaReady]).then(() => {
-            //grecaptcha.render(this._button, { sitekey: recaptchaKey }, true);
+            this.mountRecaptcha();
         });
 
+        this.clearForm = this.clearForm.bind(this);
+        this.mountRecaptcha = this.mountRecaptcha.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
         this.onInputChange = this.onInputChange.bind(this);
+    }
+
+    mountRecaptcha() {
+        grecaptcha.render(this._button, { sitekey: recaptchaKey, callback: this.onSubmit }, true);
+    }
+
+    clearForm() {
+        this.setState({name: '', email: ''});
+        this.mountRecaptcha();
     }
 
     componentDidMount() {
@@ -42,9 +53,10 @@ export class KeepMeInTheLoop extends React.Component {
         return !Object.values(errors).filter(x => x).length;
     }
 
-    onSubmit(event) {
+    onSubmit(token) {
+        console.log('submit', arguments);
         if (this.validate()) {
-            const formData = { email: this.state.email, name: this.state.name };
+            const formData = { email: this.state.email, name: this.state.name, token };
             this.setState({ state: 'submitting' });
             fetch('/api/contact', {
                 method: 'POST',
@@ -54,10 +66,10 @@ export class KeepMeInTheLoop extends React.Component {
                 }
             }).then(() => {
                 this.setState({ state: 'submitted' });
-                setTimeout(() => { this.setState({ state: null }); }, 3000);
+                setTimeout(() => { this.setState({ state: null }); this.clearForm(); }, 3000);
             }, () => {
                 this.setState({ state: 'error' });
-                setTimeout(() => { this.setState({ state: null }); }, 3000);
+                setTimeout(() => { this.setState({ state: null }); this.clearForm(); }, 3000);
             });
         }
         event.preventDefault();
