@@ -19,6 +19,8 @@ const production = environment == 'production';
 
 const gaTrackingId = process.env.GA_TRACKING_ID || 'UA-114404288-1';
 
+const listFile = './data.csv';
+
 module.exports = {
     environment,
     production,
@@ -33,5 +35,6 @@ module.exports = {
     oAuthDomain,
     recaptchaKey,
     recaptchaSecret,
-    gaTrackingId
+    gaTrackingId,
+    listFile
 }
