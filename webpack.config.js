@@ -11,9 +11,9 @@ const plugins = [
     new HtmlWebpackPlugin({ template: 'app/index.ejs', gaTrackingId: config.gaTrackingId }),
     new webpack.NoEmitOnErrorsPlugin(),
     new webpack.DefinePlugin({
-        environment: config.environment,
-        recaptchaKey: config.recaptchaKey,
-        clientId: config.clientId
+        environment: JSON.stringify(config.environment),
+        recaptchaKey: JSON.stringify(config.recaptchaKey),
+        clientId: JSON.stringify(config.clientId)
     })
 ];
 
@@ -21,13 +21,18 @@ const app = [
     './app/index.js'
 ];
 
+const babelPlugins = [];
+
 if (config.production) {
+    console.log('running production webpack build');
     plugins.push(new MinifyPlugin());
 } else {
+    console.log('running development webpack build');
     plugins.push(new webpack.HotModuleReplacementPlugin());
 
     app.splice(0, 0, 'react-hot-loader/patch');
     app.push('webpack-hot-middleware/client');
+    babelPlugins.push('react-hot-loader/babel');
 }
 
 module.exports = {
@@ -53,7 +58,7 @@ module.exports = {
                     loader: 'babel-loader',
                     options: {
                         presets: ['env', 'react'],
-                        plugins: ['react-hot-loader/babel']
+                        plugins: babelPlugins
                     }
                 }
             }
@@ -61,7 +66,7 @@ module.exports = {
     },
     output: {
         publicPath: '/',
-        filename: `bundle-${now}.js`,
+        filename: config.production ? `bundle-${now}.js` : 'bundle-dev.js',
         path: path.resolve(__dirname, dist)
     }
 };
