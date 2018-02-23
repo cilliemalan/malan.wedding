@@ -16,6 +16,9 @@ const recaptchaSecret = process.env.RECAPTCH_SECRET;
 const environment = process.env.NODE_ENV;
 const production = environment == 'production';
 
+
+const gaTrackingId = process.env.GA_TRACKING_ID || 'UA-114404288-1';
+
 module.exports = {
     environment,
     production,
@@ -29,5 +32,6 @@ module.exports = {
     clientSecret,
     oAuthDomain,
     recaptchaKey,
-    recaptchaSecret
+    recaptchaSecret,
+    gaTrackingId
 }
