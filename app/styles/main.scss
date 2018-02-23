@@ -83,4 +83,39 @@ select {
     margin: 0;
     padding: 20px 10px;
     background: #fff;
+    margin-bottom: 200px;
+
+    ul {
+        display: flex;
+        list-style: none;
+        width: 100%;
+        max-width: 800px;
+        padding: 0;
+        margin: 0 auto;
+        flex-wrap: wrap;
+        justify-content: center;
+
+        li {
+            width: 200px;
+            height: 200px;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            margin: 20px;
+            border: 1px solid #eee;
+            box-shadow: 0 3px 5px rgba(0,0,0,0.2);
+            padding: 10px;
+            background: white;
+
+            &:hover {
+                box-shadow: 0 3px 5px rgba(0,0,0,0.3);
+            }
+
+            img {
+                max-width: 200px;
+                max-height: 200px;
+            }
+        }
+    }
 }
