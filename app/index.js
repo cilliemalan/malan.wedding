@@ -12,7 +12,7 @@ if (environment == 'production') {
 } else {
     // i know webpack hot reload auto-ignores on production
     // but the scripts are not included in production env
-    const AppContainer = require('react-hot-loader');
+    const AppContainer = require('react-hot-loader').AppContainer;
 
     ReactDOM.render(
         <AppContainer>
