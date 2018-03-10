@@ -56,7 +56,7 @@ api.post('/rsvp', (req, res) => {
     }
 
     const { name, email, num, coming, rsvp } = body || {};
-    if (!name || !email || !num) {
+    if (!rsvp || !email) {
         res.redirect('/#error');
     } else {
         const unquote = (a) => a.replace(/"/g, '');

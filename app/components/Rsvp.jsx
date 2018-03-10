@@ -154,7 +154,7 @@ export class Rsvp extends React.Component {
         return <div>
             <p className="note">Will you be joining us on the 13th of April?</p>
             <div className="yesno">
-                <input type="hidden" name="email" value={this.state.email} />
+                <input type="hidden" name="email" value={this.state.email || this.props.email} />
                 <button className="yes" onClick={(e) => { e.preventDefault(); this.setState((state) => ({...state, yesno: "yes"})); } }>YES!</button>
                 <button className="no" type="submit">Unfortunately not</button>
             </div>
