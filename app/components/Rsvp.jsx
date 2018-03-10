@@ -83,7 +83,7 @@ export class Rsvp extends React.Component {
                     <p className="note">Please indicate attendance for the Dinner Receiption</p>
                     <ul className="section2">
                         {guests.map((guest, i) => <li key={i}>
-                            <input type="checkbox" id={`chk-${i}`} />
+                            <input type="checkbox" name="coming" value={guest} id={`chk-${i}`} />
                             <label htmlFor={`chk-${i}`}>{guest}</label>
                         </li>)}
                     </ul>
@@ -146,6 +146,7 @@ export class Rsvp extends React.Component {
         return <div>
             <p className="note">Will you be joining us on the 13th of April?</p>
             <div className="yesno">
+                <input type="hidden" name="email" value={this.state.email} />
                 <button className="yes" onClick={(e) => { e.preventDefault(); this.setState((state) => ({...state, yesno: "yes"})); } }>YES!</button>
                 <button className="no" type="submit">Unfortunately not</button>
             </div>
@@ -158,8 +159,7 @@ export class Rsvp extends React.Component {
         return <div className="rsvp-outer">
             <h1>RSVP</h1>
             <form method="POST" action="/api/rsvp/">
-                <input type="hidden" name="going" value={yesno || "no"} />
-                <input type="hidden" name="email" value={this.state.email} />
+                <input type="hidden" name="rsvp" value={yesno || "no"} />
                 {yesno ? this.internals() : this.yesno()}
             </form>
         </div>
