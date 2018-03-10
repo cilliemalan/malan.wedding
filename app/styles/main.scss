@@ -190,3 +190,49 @@ select {
         margin-top:-50px;
     }
 }
+
+.rsvp {
+    background: white;
+    margin: 0;
+    overflow: hidden;
+
+    
+    @media (max-width: 720px) {
+        height: 350px;
+    }
+
+    form {
+        display: flex;
+        flex-wrap: wrap;
+        max-width: 800px;
+        margin: 0 auto;
+
+        & > div {
+            width: calc(33% - 10px);
+            height: 40px;
+            margin: 5px;
+                
+            @media (max-width: 720px) {
+                width: 100%;
+            }
+
+            input, button {
+                width: 100%;
+                padding: 5px;
+                font-size: 16px;
+                height: 40px;
+                box-sizing: border-box;
+            }
+        }
+    }
+    
+    .smallprint {
+        font-size:11px;
+        text-align: right;
+        max-width: 800px;
+        width: 100%;
+        padding: 0 10px;
+        box-sizing: border-box;
+        margin: 0 auto;
+    }
+}
