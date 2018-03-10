@@ -36,6 +36,10 @@ select {
     }
 }
 
+button {
+    cursor: pointer;
+}
+
 .notfound {
     font-size: 15vmin;
     font-weight: bold;
@@ -66,6 +70,26 @@ select {
         right: 0;
         text-decoration: none;
         padding: 17px 20px;
+    }
+}
+
+.rsvp-block {
+    background: white;
+    padding: 10px;
+    margin: 0;
+    overflow: hidden;
+    text-align: center;
+
+    .rsvp-button {
+        cursor: pointer;
+        padding: 20px;
+        font-size: 20px;
+        border-radius: 5px;
+        background: rgb(74, 183, 255);
+        text-decoration: none;
+        margin: 10px auto 20px ;
+        display:block;
+        width: 100px;
     }
 }
 
@@ -310,12 +334,13 @@ select {
     }
 }
 
+p.note {
+    font-style: italic;
+    font-size:14px;
+}
+
 .rsvp-outer {
     
-    .note {
-        font-style: italic;
-        font-size:14px;
-    }
 
     
     
