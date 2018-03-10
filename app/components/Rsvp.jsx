@@ -7,12 +7,13 @@ export class Rsvp extends React.Component {
         // bad I know
         if(props.person) {
             const { email, description, guestlist } = props.person;
+            const num = guestlist.length;
 
             this.state = {
                 errors: {},
                 name: description,
                 email: email,
-                num: guestlist && `${guestlist.length} people`,
+                num: num && `${num} ${num == 1 ? 'person' : 'people'}`,
                 special: !!email,
                 guests: guestlist
             };
