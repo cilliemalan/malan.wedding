@@ -1,22 +1,44 @@
 import React from 'react';
 
-const mustFlash = /\bflash\b/i.test(location.hash);
 
 export class Flasher extends React.Component {
-    constructor() {
-        super();
-        this.state = { mustFlash }
+    constructor(p) {
+        super(p);
         this.hideme = this.hideme.bind(this);
+        this.hashChange = this.hashChange.bind(this);
+    }
+
+    hashChange() {
+        const flashmatch = location.hash.match(/\b(flash|error|sorry|thanks)\b/i);
+        const flash = flashmatch && flashmatch[1];
+        const mustFlash = !!flash;
+        this.setState((state) => ({ ...state, mustFlash, flash }))
+    }
+
+    componentWillMount() {
+        addEventListener('hashchange', this.hashChange);
+        this.hashChange();
+    }
+
+    componentWillUnmount() {
+        removeEventListener('hashchange', this.hashChange);
     }
 
     hideme() {
-        this.setState({ mustFlash: false });
+        window.location.hash = "";
     }
 
     render() {
-        if (this.state.mustFlash) {
+        let message;
+        switch (this.state.flash) {
+            case "error": message = "Something went wrong with your submission. Please try again!"; break;
+            case "thanks": message = "We're glad you can join us!"; break;
+            case "sorry": message = "That's too bad!"; break;
+            case "flash": message = "We will keep you posted!"; break;
+        }
+        if (message) {
             return <div id="flasher">
-                We will keep you posted!
+                {message}
                 <a href="javascript:void(0)" onClick={this.hideme}>×</a>
             </div>;
         } else {
