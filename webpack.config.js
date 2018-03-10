@@ -5,7 +5,7 @@ const webpack = require('webpack');
 const config = require('./config');
 
 const dist = path.resolve(__dirname, 'public');
-const now = new Date().toISOString().replace(/[:.ZT-]/g,'');
+const now = new Date().toISOString().replace(/[:.ZT-]/g, '');
 
 const plugins = [
     new HtmlWebpackPlugin({ template: 'app/index.ejs', gaTrackingId: config.gaTrackingId }),
@@ -21,7 +21,7 @@ const app = [
     './app/index.js'
 ];
 
-const babelPlugins = [];
+const babelPlugins = ['transform-object-rest-spread'];
 
 if (config.production) {
     console.log('running production webpack build');
