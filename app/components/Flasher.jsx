@@ -33,7 +33,7 @@ export class Flasher extends React.Component {
         switch (this.state.flash) {
             case "error": message = "Something went wrong with your submission. Please try again!"; break;
             case "thanks": message = "We're glad you can join us!"; break;
-            case "sorry": message = "That's too bad!"; break;
+            case "sorry": message = "We'll miss you!"; break;
             case "flash": message = "We will keep you posted!"; break;
         }
         if (message) {
