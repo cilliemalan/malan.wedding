@@ -1,4 +1,5 @@
 const winston = require('winston');
+const util = require('util');
 const express = require('express');
 const jwt = require('express-jwt');
 const jwks = require('jwks-rsa');
@@ -44,6 +45,36 @@ api.use(express.json());
 
 api.get('/', (req, res) => res.json({ status: 'ok' }));
 
+api.post('/rsvp', (req, res) => {
+
+    const { body } = req;
+    if (body) {
+        // I hope whoever made me do this loses his keys while he's at the gym.
+        Object.keys(body)
+            .filter(k => util.isArray(body[k]))
+            .forEach(k => body[k] = body[k].join(','));
+    }
+
+    const { name, email, num, coming, rsvp } = body || {};
+    if (!name || !email || !num) {
+        res.redirect('/#error');
+    } else {
+        const unquote = (a) => a.replace(/"/g, '');
+        const escape = (a) => a && ((a.indexOf(',') >= 0) ? `"${unquote(a)}"` : unquote(a));
+        fs.appendFile(config.rsvpFile, [rsvp, name, email, num, coming].map(escape).join(',') + "\n", e => {
+            if (e) {
+                res.redirect('/#error');
+            } else {
+                if (rsvp == "yes") {
+                    res.redirect('/#thanks');
+                } else {
+                    res.redirect('/#sorry');
+                }
+            }
+        });
+    }
+});
+
 api.post('/contact', (req, res) => {
     const name = req.body.name;
     const email = req.body.email;
@@ -58,7 +89,7 @@ api.post('/contact', (req, res) => {
 
         recaptcha.validate(token).then(() => {
             fs.appendFile(config.listFile, `${name.replace(/,/g, ';')},${email.replace(/,/g, ';')}\n`, e => {
-                if(e) {
+                if (e) {
                     res.status(500).end();
                 } else {
                     res.end();
