@@ -208,26 +208,82 @@ select {
     }
 }
 
+.rsvpextender {
+    background: white;
+    max-width: 1000px;
+    margin: 0 auto;
+    min-height: 100vh;
+        
+    .rsvpcontainer {
+        background-image: url('../content/leavesall.jpg');
+        background-repeat: no-repeat;
+        background-size: 120%;
+        background-position: center -100px;
+        padding-top: 100px;
+        padding-left: 100px;
+        padding-right: 100px;
+        box-sizing: border-box;
+        height: 1000px;
+
+
+        @media (max-width: 1000px) {
+            background-position: center -10vw;
+            padding-top: 10vw;
+            padding-left: 10vw;
+            padding-right: 10vw;
+            height: 130vw;
+        }
+
+        .rsvp {
+            background: none;
+        }
+
+        img {
+            display: none;
+            width: 100%;
+            max-width: 1000px;
+            position: absolute;
+            top: 0;
+            right: 0;
+        }
+    }
+}
+
 .rsvp {
     background: white;
     margin: 0;
     overflow: hidden;
+    padding-bottom: 100px;
 
     
     @media (max-width: 720px) {
-        height: 350px;
+        padding-bottom: 0;
     }
 
-    form {
+    .form {
         display: flex;
         flex-wrap: wrap;
-        max-width: 800px;
+        max-width: 1000px;
         margin: 0 auto;
 
-        & > div {
-            width: calc(33% - 10px);
+        div.group {
+            width: calc(50% - 110px);
             height: 40px;
             margin: 5px;
+
+            &.num {
+                width: 80px;
+                @media (max-width: 720px) {
+                    width: 100%;
+                }
+            }
+
+            &.submit {
+                width: 100px;
+                @media (max-width: 720px) {
+                    width: 100%;
+                }
+            }
                 
             @media (max-width: 720px) {
                 width: 100%;
@@ -246,7 +302,204 @@ select {
     .smallprint {
         font-size:11px;
         text-align: right;
-        max-width: 800px;
+        max-width: 1000px;
+        width: 100%;
+        padding: 0 10px;
+        box-sizing: border-box;
+        margin: 0 auto;
+    }
+}
+
+.rsvp-outer {
+    
+    .note {
+        font-style: italic;
+        font-size:14px;
+    }
+
+    
+    
+    @media (max-width: 720px) {
+        .yesno {
+            text-align: center;
+            
+            button {
+                cursor: pointer;
+                font-size: 20px;
+                width: 100%;
+
+                &.yes {
+                    display: block;
+                    margin: 100px 0 250px 0;
+                    padding: 20px 5px;
+                }
+
+                &.no {
+                    display: inline;
+                    background: none;
+                    border: none;
+                    text-decoration: underline;
+                    bottom: 0;
+                }
+            }
+        }
+    }
+    @media (min-width: 721px) {
+        .yesno {
+            display: flex;
+            justify-content: space-between;
+
+            button {
+                cursor: pointer;
+                font-size: 20px;
+                padding: 20px 5px;
+                width: 200px;
+            }
+        }
+    }
+
+}
+
+.rsvpspecial {
+    background: white;
+    margin: 0;
+    overflow: hidden;
+    padding-bottom: 100px;
+
+
+    
+    @media (max-width: 720px) {
+        padding-bottom: 0;
+    }
+
+    .form {
+        max-width: 1000px;
+        margin: 0 auto;
+
+        .section1 {
+            display: flex;
+            flex-wrap: wrap;
+            text-align: left;
+        }
+
+        div.group {
+            height: 40px;
+        }
+
+        label.group {
+            font-weight: bold;
+            font-size: 14px;
+            margin-bottom: 0;
+            @media (max-width: 720px) {
+                display: none;
+            }
+        }
+
+        .group {
+            width: calc(50% - 60px);
+            margin-top: 0;
+            margin: 5px;
+
+            &.num {
+                width: 80px;
+                @media (max-width: 720px) {
+                    width: 100%;
+                }
+            }
+
+            &.submit {
+                width: 100%;
+                text-align: center;
+
+                @media (min-width: 721px) {
+                    margin: 20px 0 4px 0;
+                }
+                
+                @media (max-width: 720px) {
+                    margin: 0 0 4px 0;
+                }
+                
+                button {
+                    padding: 5px;
+                    font-size: 16px;
+                    height: 40px;
+                    box-sizing: border-box;
+                    cursor: pointer;
+                        
+                    @media (min-width: 721px) {
+                        width: 100%;
+                        max-width: 200px;
+                        margin: 0 10px 0 0;
+                    }
+                    
+                    @media (max-width: 720px) {
+                        width: 100%;
+                    }
+                }
+            }
+                
+            @media (max-width: 720px) {
+                width: 100%;
+                margin-top: 5px;
+            }
+
+            input {
+                width: 100%;
+                padding: 5px;
+                font-size: 16px;
+                height: 40px;
+                box-sizing: border-box;
+            }
+        }
+
+        ul.section2 {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            text-align: left;
+            max-width: 350px;
+            margin: 0 auto;
+            font-size: 30px;
+
+            li {
+                display: block;
+                margin: 15px 5px;
+                line-height: 25px;
+
+                label {
+                    display: block;
+                    height: 25px;
+                    font-size: 25px;
+                    cursor: pointer;
+                }
+
+                input {
+                    display: none;
+                }
+
+                label::before {
+                    font-weight: bold;
+                    display: inline-block;
+                    padding: 0;
+                    background-image: url('../content/checkbox.png');
+                    content: '';
+                    width: 25px;
+                    height: 25px;
+                    vertical-align: middle;
+                    background-size: 100%;
+                }
+
+                input:checked + label::before {
+                    background-position-y: 25px;
+                }
+            }
+        }
+    }
+    
+    .smallprint {
+        font-size:11px;
+        text-align: center;
+        max-width: 1000px;
         width: 100%;
         padding: 0 10px;
         box-sizing: border-box;
