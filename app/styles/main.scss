@@ -36,6 +36,23 @@ select {
     }
 }
 
+.notfound {
+    font-size: 15vmin;
+    font-weight: bold;
+    box-sizing: border-box;
+    margin: 0;
+    padding-top: 20vh;
+    background: #EEE;
+    width: 100vw;
+    height: 100vh;
+    color: #AAA;
+
+    p {
+        font-size: 30px;
+        font-weight: normal;
+    }
+}
+
 #flasher {
     display: block;
     width: 100%;
