@@ -20,6 +20,7 @@ const production = environment == 'production';
 const gaTrackingId = process.env.GA_TRACKING_ID || 'UA-114404288-1';
 
 const listFile = './data.csv';
+const rsvpFile = './rsvp.csv';
 
 module.exports = {
     environment,
@@ -36,5 +37,6 @@ module.exports = {
     recaptchaKey,
     recaptchaSecret,
     gaTrackingId,
-    listFile
+    listFile,
+    rsvpFile
 }
