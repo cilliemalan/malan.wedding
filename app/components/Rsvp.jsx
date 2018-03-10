@@ -5,16 +5,23 @@ export class Rsvp extends React.Component {
         super(props);
 
         // bad I know
-        const { email, description, guestlist } = props.person || {};
+        if(props.person) {
+            const { email, description, guestlist } = props.person;
 
-        this.state = {
-            errors: {},
-            name: description,
-            email: email,
-            num: guestlist && `${guestlist.length} people`,
-            special: !!email,
-            guests: guestlist
-        };
+            this.state = {
+                errors: {},
+                name: description,
+                email: email,
+                num: guestlist && `${guestlist.length} people`,
+                special: !!email,
+                guests: guestlist
+            };
+        } else {
+            this.state = {
+                errors: {},
+                yesno: props.email ? null : "yes"
+            };
+        }
 
         this.clearForm = this.clearForm.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
@@ -38,6 +45,7 @@ export class Rsvp extends React.Component {
     internals() {
         const errorClass = (element) => this.state.errors[element] ? 'error' : '';
         const { special, name, email, num, guests } = this.state;
+        const initialEmail = this.props.email;
 
         if (special) {
             return <div className='rsvpspecial'>

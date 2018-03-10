@@ -15,7 +15,7 @@ export const RsvpContainer = (props) => {
     return <div className="rsvpextender">
         <div className="rsvpcontainer">
             <img className="leaves" src={leavesall} />
-            <Rsvp person={person} />
+            <Rsvp person={person} email={hasEmail} />
         </div>
     </div>;
 }
