@@ -1,8 +1,7 @@
 import React from 'react';
 import leavesall from '../content/leavesall.jpg';
-import imgrestleaves from '../content/restleaves.jpg';
 import imgnames from '../content/names.png';
-import imgtext from '../content/text.svg';
+import imgtext from '../content/text.png';
 
 export const Invite = (props) =>
     <div className="invite">
