@@ -206,7 +206,10 @@ button {
     background: white;
     position: relative;
     overflow: hidden;
-    min-height: 100vw;
+
+    @media (max-width: 1000px) {
+        min-height: 100vw;
+    }
 
     .leavesall {
         width: 100%;
