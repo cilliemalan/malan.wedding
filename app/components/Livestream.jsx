@@ -28,7 +28,7 @@ export class Livestream extends React.Component {
     render() {
         const relative = moment(this.state.event).fromNow();
         return <div>
-            Join us for the <a href="https://www.youtube.com/watch?v=y48M2_ys90Q">live stream on youtube</a> in <strong>{relative}</strong>!
+            Join us for the <a href="https://www.youtube.com/watch?v=y48M2_ys90Q">live stream on youtube</a> <strong>{relative}</strong>!
         </div>;
     }
 }
